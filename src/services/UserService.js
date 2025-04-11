@@ -20,8 +20,8 @@ export async function createUser(user) {
 }
 
 export async function updateUser(id, user) {
-    const response = await fetch(BASE_URL + `users/update/${id}`, {
-        method: 'PUT',
+    const response = await fetch(BASE_URL + `users/edit/${id}`, {
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user),
     });

@@ -33,10 +33,18 @@ function App() {
             Swal.fire("Error", "Todos los campos son obligatorios", "error");
             return;
         }
-
+    
         const response = await loginUser(loginData);
         if (response.access_token) {
             localStorage.setItem("user", JSON.stringify(response.user));
+            await Swal.fire({
+                title: "¡Inicio de sesión exitoso!",
+                text: `Bienvenido ${response.user.name}`,
+                icon: "success",
+                timer: 2000,
+                showConfirmButton: false
+            });
+            
             navigate("/perfil");
         } else {
             Swal.fire("Error", "Credenciales inválidas", "error");
