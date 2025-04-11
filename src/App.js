@@ -4,7 +4,7 @@ import { useState } from "react";
 import Swal from "sweetalert2";
 import useUsers from "./hooks/useUser";
 import { deleteUser, loginUser } from "./services/UserService";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function App() {
     const { users, fetchUsers } = useUsers();
@@ -47,9 +47,7 @@ function App() {
         <div className="container mt-4">
             <h2 className="mb-4">Lista de Usuarios</h2>
 
-            <button className="btn btn-primary mb-3" onClick={() => navigate("/create")}>
-                Crear Usuario
-            </button>
+            <button className="btn btn-primary mb-3" onClick={() => navigate("/create")}>Crear Usuario</button>
 
             <table className="table table-striped">
                 <thead className="thead-dark">
@@ -65,9 +63,9 @@ function App() {
                             <td>{user.name}</td>
                             <td>{user.email}</td>
                             <td>
-                                <button className="btn btn-danger btn-sm" onClick={() => handleDeleteUser(user.id)}>
-                                    Eliminar
-                                </button>
+                                <Link to={`/view/${user.id}`} className="btn btn-info btn-sm me-1">Ver</Link>
+                                <Link to={`/edit/${user.id}`} className="btn btn-warning btn-sm me-1">Editar</Link>
+                                <button className="btn btn-danger btn-sm" onClick={() => handleDeleteUser(user.id)}>Eliminar</button>
                             </td>
                         </tr>
                     ))}
@@ -90,9 +88,7 @@ function App() {
                     value={loginData.password}
                     onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
                 />
-                <button className="btn btn-success" onClick={handleLogin}>
-                    Iniciar Sesión
-                </button>
+                <button className="btn btn-success" onClick={handleLogin}>Iniciar Sesión</button>
             </div>
         </div>
     );
